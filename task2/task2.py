@@ -27,8 +27,8 @@ def get_theoretical_distribution(p_matrix):
     a_matrix = p_transpose - np.identity(3)
     a_matrix[-1] = np.ones(3)
     if round(np.linalg.det(a_matrix), 5) == 0:
-        raise AssertionError("A matrix determinant is equal 0!")
-    return np.linalg.solve(a_matrix, b_matrix)
+        raise AssertionError("The matrix determinant is equal 0!")
+    return np.linalg.inv(a_matrix).dot(b_matrix)
 
 
 if __name__ == '__main__':

@@ -28,10 +28,14 @@ def theoretical_average_life_system(p_matrix, start_state):
 
 
 if __name__ == '__main__':
-    P = np.array([[0.9, 0.05, 0.05],
-                  [0.8, 0.1, 0.1],
-                  [1, 0, 0]])
+    P = np.array([[0.95, 0.03, 0.02],
+                  [0.8, 0.15, 0.05],
+                  [0, 0, 1]])
     N = 200000
+    my_start_state = 0
+    print("Experimental value: {}".format(average_system_life(P, my_start_state, N)))
+    print("Theoretical value: {}".format(theoretical_average_life_system(P, my_start_state)))
+
     my_start_state = 1
     print("Experimental value: {}".format(average_system_life(P, my_start_state, N)))
     print("Theoretical value: {}".format(theoretical_average_life_system(P, my_start_state)))
