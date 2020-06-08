@@ -44,14 +44,13 @@ def get_experimental_values(input_lambda, time, queue_capacity):
     return mean_queue_size, mean_delay
 
 
-def get_probably(i, input_lambda):
-    return np.math.pow(input_lambda, i) * np.exp(-input_lambda) / np.math.factorial(i)
+def get_probably(degree, input_lambda):
+    return np.math.pow(input_lambda, degree) * np.exp(-input_lambda) / np.math.factorial(degree)
 
 
-def gen_matrix(input_lambda, b):
+def generate_matrix(input_lambda, b):
     states_num = b + 1
-    p_matrix = [[0] * states_num] * states_num
-    p_matrix = np.asarray(p_matrix, dtype=float)
+    p_matrix = np.zeros((states_num, states_num), dtype=float)
     for i in range(0, states_num - 1):
         p_matrix[0, i] = p_matrix[1, i] = get_probably(i, input_lambda)
     p_matrix[0, states_num - 1] = 1 - sum(p_matrix[0])
@@ -72,7 +71,7 @@ def gen_matrix(input_lambda, b):
 
 
 def get_theoretical_values(input_lambda, queue_capacity):
-    p_matrix = gen_matrix(input_lambda, queue_capacity)
+    p_matrix = generate_matrix(input_lambda, queue_capacity)
     vector = np.zeros(queue_capacity + 1)
     vector[-1] = 1
     p_i = np.linalg.solve(p_matrix, vector)
