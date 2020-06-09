@@ -7,7 +7,7 @@ if __name__ == '__main__':
     T = 10000
     queue_capacity = 10
 
-    start, end, step = 0.1, 1.1, 0.1
+    start, end, step = 0.1, 2, 0.1
     array_lambda = np.arange(start, end, step)
 
     n = []

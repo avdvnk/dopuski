@@ -26,11 +26,13 @@ def get_experimental_values(input_lambda, time, queue_capacity):
     total_queue_size = 0
     total_delay = 0
     total_queue_messages = 0
+    total_success_messages = 0
     for i in range(len(messages)):
         total_queue_size += len(queue)
         if len(queue) > 0:
-            node = queue.pop()
-            delay = i - node
+            processing_message = queue.pop(0)
+            total_success_messages += 1
+            delay = i - processing_message
             total_delay += delay
         if messages[i] > 0:
             for j in range(int(messages[i])):
@@ -40,7 +42,7 @@ def get_experimental_values(input_lambda, time, queue_capacity):
                     break
             total_queue_messages += messages[i]
     mean_queue_size = total_queue_size / time
-    mean_delay = total_delay / total_queue_messages
+    mean_delay = total_delay / total_success_messages
     return mean_queue_size, mean_delay
 
 
