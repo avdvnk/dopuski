@@ -43,7 +43,8 @@ def get_experimental_values(input_lambda, time, queue_capacity):
             total_queue_messages += messages[i]
     mean_queue_size = total_queue_size / time
     mean_delay = total_delay / total_success_messages
-    return mean_queue_size, mean_delay
+    lambda_output = total_success_messages / time
+    return mean_queue_size, mean_delay, lambda_output
 
 
 def get_probably(degree, input_lambda):
@@ -82,4 +83,4 @@ def get_theoretical_values(input_lambda, queue_capacity):
         mean_queue_size_th += j * p_i[j]
     output_lambda = 1 - p_i[0]
     mean_delay_th = mean_queue_size_th / output_lambda
-    return mean_queue_size_th, mean_delay_th
+    return mean_queue_size_th, mean_delay_th, output_lambda
